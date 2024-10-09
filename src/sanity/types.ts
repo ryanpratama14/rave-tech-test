@@ -68,6 +68,38 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Faq = {
+  _id: string;
+  _type: "faq";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  faqItems?: Array<{
+    question?: string;
+    response?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    _type: "faqItem";
+    _key: string;
+  }>;
+};
+
 export type TopTourSummary = {
   _id: string;
   _type: "topTourSummary";
@@ -89,6 +121,8 @@ export type TopTourSummary = {
   slug?: Slug;
   title?: string;
   description?: string;
+  promoTitle?: string;
+  promoDescription?: string;
   travel?: string;
   accommodation?: string;
   meals?: string;
@@ -119,6 +153,12 @@ export type SightseeingHighlights = {
     _type: "reference";
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "topTourSummary";
+  };
+  title?: string;
+  cta?: {
+    ctaTitle?: string;
+    slug?: string;
+    description?: string;
   };
   firstHighlights?: Array<{
     children?: Array<{
@@ -170,6 +210,12 @@ export type TravelHighlights = {
     _type: "reference";
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "topTourSummary";
+  };
+  title?: string;
+  cta?: {
+    ctaTitle?: string;
+    slug?: string;
+    description?: string;
   };
   firstHighlights?: Array<string>;
   secondHighlights?: Array<string>;
@@ -238,7 +284,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | TopTourSummary | SightseeingHighlights | TravelHighlights | Slug | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Faq | TopTourSummary | SightseeingHighlights | TravelHighlights | Slug | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: TOP_TOUR_SUMMARIES_QUERY
@@ -264,6 +310,8 @@ export type TOP_TOUR_SUMMARIES_QUERYResult = Array<{
   slug: Slug | null;
   title?: string;
   description?: string;
+  promoTitle?: string;
+  promoDescription?: string;
   travel?: string;
   accommodation?: string;
   meals?: string;
@@ -281,6 +329,12 @@ export type TOP_TOUR_SUMMARIES_QUERYResult = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "topTourSummary";
     };
+    title?: string;
+    cta?: {
+      ctaTitle?: string;
+      slug?: string;
+      description?: string;
+    };
     firstHighlights?: Array<string>;
     secondHighlights?: Array<string>;
   } | null;
@@ -296,6 +350,12 @@ export type TOP_TOUR_SUMMARIES_QUERYResult = Array<{
       _type: "reference";
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "topTourSummary";
+    };
+    title?: string;
+    cta?: {
+      ctaTitle?: string;
+      slug?: string;
+      description?: string;
     };
     firstHighlights?: Array<{
       children?: Array<{
@@ -358,6 +418,8 @@ export type TOP_TOUR_SUMMARY_QUERYResult = {
   slug?: Slug;
   title?: string;
   description?: string;
+  promoTitle?: string;
+  promoDescription?: string;
   travel?: string;
   accommodation?: string;
   meals?: string;
@@ -375,6 +437,12 @@ export type TOP_TOUR_SUMMARY_QUERYResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "topTourSummary";
     };
+    title?: string;
+    cta?: {
+      ctaTitle?: string;
+      slug?: string;
+      description?: string;
+    };
     firstHighlights?: Array<string>;
     secondHighlights?: Array<string>;
   } | null;
@@ -390,6 +458,12 @@ export type TOP_TOUR_SUMMARY_QUERYResult = {
       _type: "reference";
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "topTourSummary";
+    };
+    title?: string;
+    cta?: {
+      ctaTitle?: string;
+      slug?: string;
+      description?: string;
     };
     firstHighlights?: Array<{
       children?: Array<{
@@ -429,6 +503,39 @@ export type TOP_TOUR_SUMMARY_QUERYResult = {
     }>;
   } | null;
 } | null;
+// Variable: FAQ_QUERY
+// Query: *[_type == "faq"][0] {  ...}
+export type FAQ_QUERYResult = {
+  _id: string;
+  _type: "faq";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  faqItems?: Array<{
+    question?: string;
+    response?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    _type: "faqItem";
+    _key: string;
+  }>;
+} | null;
 
 // Query TypeMap
 import "@sanity/client";
@@ -436,5 +543,6 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"topTourSummary\"] {\n    ...,\n    slug,\n    travelHighlights->{\n      ...,\n    },\n    sightseeingHighlights->{\n      ...,\n    }\n  }": TOP_TOUR_SUMMARIES_QUERYResult;
     "*[_type == \"topTourSummary\" && slug.current == $slug][0] {\n    ...,\n    travelHighlights->{\n      ...,\n    },\n    sightseeingHighlights->{\n      ...,\n    }\n  }": TOP_TOUR_SUMMARY_QUERYResult;
+    "*[_type == \"faq\"][0] {\n  ...\n}": FAQ_QUERYResult;
   }
 }

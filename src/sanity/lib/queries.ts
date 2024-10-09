@@ -20,3 +20,7 @@ export const TOP_TOUR_SUMMARY_QUERY = defineQuery(`*[_type == "topTourSummary" &
       ...,
     }
   }`);
+
+export const FAQ_QUERY = defineQuery(`*[_type == "faq"][0] {
+  ...
+}`);

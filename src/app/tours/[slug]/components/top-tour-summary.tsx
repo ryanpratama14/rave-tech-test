@@ -1,5 +1,3 @@
-"use client";
-
 import Img from "@/components/html/img";
 import { ICONS } from "@/lib/constants";
 import { urlFor } from "@/sanity/lib/image";
@@ -17,10 +15,10 @@ export default function TopTourSummary({ data }: Props) {
   ] as const;
 
   return (
-    <article className="grid grid-cols-2">
+    <article className="grid lg:grid-cols-2">
       {data?.image ? <Img src={urlFor(data.image).url()} alt={data?.image?.alt ?? ""} className="size-full object-cover overflow-hidden" /> : null}
 
-      <section className="py-10 pl-16 pr-32 text-dark flex flex-col gap-6 justify-center">
+      <section className="p-shorter lg:py-10 lg:px-16 xl:pr-32 text-dark flex flex-col gap-6 justify-center">
         <h1 className="font-bold font-source">{data?.title}</h1>
         <p>{data?.description}</p>
         <section className="grid grid-cols-2 gap-6">
@@ -32,7 +30,7 @@ export default function TopTourSummary({ data }: Props) {
               <section key={e.icon} className="flex flex-col gap-2">
                 <section className="flex gap-2 items-center">
                   <Icon icon={e.icon} width={20} />
-                  <p className="font-semibold">{e.label}</p>
+                  <h6 className="font-semibold">{e.label}</h6>
                 </section>
                 {isItenerary ? (
                   <a className="border-b-1 border-red border-dotted hover:border-solid animate w-fit font-bold text-dark/80 hover:text-dark" href="/">
@@ -46,17 +44,17 @@ export default function TopTourSummary({ data }: Props) {
           })}
         </section>
 
-        <section className="px-4 py-3 rounded-md border-1 border-gray_lighter flex items-center justify-between gap-4">
-          <section className="space-y-2">
-            <p className="font-source font-bold text-lg">Looking to book in a group of 15 or more?</p>
+        <button
+          type="button"
+          className="px-4 py-3 rounded-md border-1 border-gray_lighter flex items-center justify-between gap-4 hover:bg-gray_lighter animate"
+        >
+          <section className="space-y-2 text-left">
+            <p className="font-source font-bold text-lg">{data?.promoTitle}</p>
 
-            <small className="text-gray">
-              Deals, savings and exclusive private touring options available plus if you need a different date or itinerary change we can create a
-              custom trip. Contact us for more details
-            </small>
+            <small className="text-gray">{data?.promoDescription}</small>
           </section>
           <Icon icon={ICONS.arrow} rotate={1} width={30} />
-        </section>
+        </button>
 
         <p>
           <b>Trip code:</b> {data?.tripCode}

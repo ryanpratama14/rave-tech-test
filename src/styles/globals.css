@@ -10,12 +10,18 @@
     @apply font-sans;
   }
   h1 {
-    @apply text-3xl;
+    @apply text-2xl lg:text-3xl;
   }
   h2 {
     @apply text-2xl;
   }
   p {
+    @apply text-[14px] lg:text-base;
+  }
+  h5 {
+    @apply text-[18px];
+  }
+  h6 {
     @apply text-base;
   }
   small {
@@ -49,4 +55,9 @@
   .centered-horizontal {
     @apply left-1/2 -translate-x-1/2;
   }
+}
+
+.sightsee-style,
+li {
+  font-size: 14px;
 }

@@ -18,6 +18,40 @@ export const sightseeingHighlights = defineType({
       to: [{ type: "topTourSummary" }],
       description: "Reference to the related Top Tour Summary for this set of highlights.",
     }),
+
+    defineField({
+      name: "title",
+      title: "Title",
+      type: "string",
+      description: "Example: 'Sightseeing highlights'",
+    }),
+
+    defineField({
+      name: "cta",
+      title: "Call To Action",
+      type: "object",
+      fields: [
+        defineField({
+          name: "ctaTitle",
+          title: "CTA Title",
+          type: "string",
+          description: "The title for the call to action.",
+        }),
+        defineField({
+          name: "slug",
+          title: "Slug",
+          type: "string",
+          description: "The slug for the call to action.",
+        }),
+        defineField({
+          name: "description",
+          title: "Description",
+          type: "string",
+          description: "Description of the call to action.",
+        }),
+      ],
+    }),
+
     defineField({
       name: "firstHighlights",
       title: "First Highlights",

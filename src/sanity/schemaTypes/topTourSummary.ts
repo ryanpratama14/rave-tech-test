@@ -37,6 +37,19 @@ export const topTourSummary = defineType({
       type: "text",
       description: "Short description of the tour, like 'Discover the Best of Italy, from the...'",
     }),
+
+    defineField({
+      name: "promoTitle",
+      title: "Promo Title",
+      type: "string",
+    }),
+
+    defineField({
+      name: "promoDescription",
+      title: "Promo Description",
+      type: "string",
+    }),
+
     defineField({
       name: "travel",
       title: "Travel",

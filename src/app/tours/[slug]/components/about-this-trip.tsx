@@ -1,37 +1,64 @@
 "use client";
 
 import { ICONS } from "@/lib/constants";
-import type { TOP_TOUR_SUMMARY_QUERYResult } from "@/sanity/types";
+import type { SightseeingHighlights, TOP_TOUR_SUMMARY_QUERYResult } from "@/sanity/types";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+import { PortableText } from "next-sanity";
 
 type Props = { data: TOP_TOUR_SUMMARY_QUERYResult };
 
 export default function AboutThisTrip({ data }: Props) {
-  console.log(data?.travelHighlights);
+  console.log(data?.sightseeingHighlights?.firstHighlights);
   return (
-    <article className="py-normal px-longer5 flex flex-col">
-      <section className="flex flex-col gap-6 py-6">
-        <h1 className="text-dark font-bold">About this trip</h1>
-        <section className="grid grid-cols-2 gap-4">
-          <h2 className="font-bold text-green">Sightseeing highlights</h2>
+    <article className="p-shorter xl:px-36 2xl:px-longer5 flex flex-col divide-y-1 divide-gray_lighter">
+      <section className="flex flex-col gap-6 py-10 max-lg:text-center w-full">
+        <h1 className="text-dark font-bold font-source">About this trip</h1>
+        <section className="grid lg:grid-cols-3 gap-4">
+          <section className="max-lg:mb-6 flex flex-col gap-2 max-lg:items-center max-lg:justify-center max-lg:text-center">
+            <h2 className="font-bold text-green font-source">{data?.sightseeingHighlights?.title}</h2>
+            {data?.sightseeingHighlights?.cta?.ctaTitle ? (
+              <section className="space-y-2">
+                <small className="text-gray">{data?.sightseeingHighlights?.cta?.description}</small>
+                <button
+                  className="hidden lg:block font-bold w-fit animate px-9 py-3 bg-green hover:bg-white hover:text-green text-white border-1 border-green"
+                  type="button"
+                >
+                  {data?.sightseeingHighlights?.cta?.ctaTitle}
+                </button>
+              </section>
+            ) : null}
+          </section>
+
+          <ContentRenderer data={data?.sightseeingHighlights?.firstHighlights} />
+          <section className="flex flex-col gap-8">
+            <ContentRenderer data={data?.sightseeingHighlights?.secondHighlights} />
+            <button
+              className="mx-auto font-bold w-fit animate px-9 py-3 bg-green hover:bg-white hover:text-green text-white border-1 border-green lg:hidden"
+              type="button"
+            >
+              {data?.sightseeingHighlights?.cta?.ctaTitle}
+            </button>
+          </section>
         </section>
       </section>
 
-      <section className="grid grid-cols-3 gap-4 py-6">
-        <section className="flex flex-col space-y-3">
-          <section className="space-y-2">
-            <h2 className="font-bold text-red_darker font-source">Travel highlights</h2>
-            <small className="text-gray">Specific transfer information can be found here:</small>
-          </section>
-          <button
-            className="font-bold w-fit animate px-6 py-3 bg-red_darker hover:bg-white hover:text-red_darker text-white border-1 border-red_darker"
-            type="button"
-          >
-            Airport Transfers
-          </button>
+      <section className="grid lg:grid-cols-3 gap-4 py-10">
+        <section className="max-lg:mb-6 flex flex-col gap-2 max-lg:items-center max-lg:justify-center max-lg:text-center">
+          <h2 className="font-bold text-red_darker font-source">{data?.travelHighlights?.title}</h2>
+          {data?.travelHighlights?.cta?.ctaTitle ? (
+            <section className="space-y-2">
+              <small className="text-gray">{data?.travelHighlights?.cta?.description}</small>
+              <button
+                className="hidden lg:block font-bold w-fit animate px-9 py-3 bg-red_darker hover:bg-white hover:text-red_darker text-white border-1 border-red_darker"
+                type="button"
+              >
+                {data?.travelHighlights?.cta?.ctaTitle}
+              </button>
+            </section>
+          ) : null}
         </section>
 
-        <section className="flex flex-col gap-6">
+        <section className="flex flex-col gap-4">
           {data?.travelHighlights?.firstHighlights?.map((e) => {
             return (
               <section key={e} className="flex gap-6">
@@ -42,17 +69,47 @@ export default function AboutThisTrip({ data }: Props) {
           })}
         </section>
 
-        <section className="flex flex-col gap-6">
-          {data?.travelHighlights?.secondHighlights?.map((e) => {
-            return (
-              <section key={e} className="flex gap-6">
-                <Icon icon={ICONS.check} className="text-red_darker" width={40} />
-                <small>{e}</small>
-              </section>
-            );
-          })}
+        <section className="flex flex-col gap-8">
+          <section className="flex flex-col gap-4">
+            {data?.travelHighlights?.secondHighlights?.map((e) => {
+              return (
+                <section key={e} className="flex gap-6">
+                  <Icon icon={ICONS.check} className="text-red_darker" width={40} />
+                  <small>{e}</small>
+                </section>
+              );
+            })}
+          </section>
+          <button
+            className="mx-auto font-bold w-fit animate px-9 py-3 bg-red_darker hover:bg-white hover:text-red_darker text-white border-1 border-red_darker lg:hidden"
+            type="button"
+          >
+            {data?.travelHighlights?.cta?.ctaTitle}
+          </button>
         </section>
       </section>
     </article>
   );
 }
+
+const ContentRenderer = ({ data }: { data: SightseeingHighlights["firstHighlights"] }) => {
+  return (
+    <section className="flex flex-col gap-4">
+      {data?.map((block) => {
+        return (
+          <section key={block._key} className="flex gap-6 text-left sightsee-style">
+            <Icon icon={ICONS.itinerary} className="text-green inline-flex" width={40} />
+            <PortableText
+              value={block}
+              components={{
+                block: {
+                  normal: ({ children }) => <small>{children}</small>,
+                },
+              }}
+            />
+          </section>
+        );
+      })}
+    </section>
+  );
+};

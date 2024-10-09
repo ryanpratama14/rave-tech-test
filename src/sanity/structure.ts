@@ -8,10 +8,11 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem("topTourSummary").title("Top Tour Summary"),
       S.documentTypeListItem("travelHighlights").title("Travel Highlights"),
       S.documentTypeListItem("sightseeingHighlights").title("Sightseeing Highlights"),
+      S.documentTypeListItem("faq").title("FAQ"),
       S.divider(),
 
       ...S.documentTypeListItems().filter(
         // biome-ignore lint/style/noNonNullAssertion: <explanation>
-        (item) => item.getId() && !["topTourSummary", "travelHighlights", "sightseeingHighlights"].includes(item.getId()!),
+        (item) => item.getId() && !["topTourSummary", "travelHighlights", "sightseeingHighlights", "faq"].includes(item.getId()!),
       ),
     ]);
