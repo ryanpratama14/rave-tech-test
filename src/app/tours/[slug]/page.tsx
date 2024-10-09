@@ -7,6 +7,7 @@ import type { Metadata } from "next";
 import { Fragment } from "react";
 import AboutThisTrip from "./components/about-this-trip";
 import Faq from "./components/faq";
+import Itinerary from "./components/itinerary";
 import TopTourSummary from "./components/top-tour-summary";
 
 type Props = { params: { slug: string } };
@@ -28,6 +29,7 @@ export default async function TourPage({ params: { slug } }: Props) {
   return (
     <Fragment>
       <TopTourSummary data={data} />
+      <Itinerary data={data} />
       <AboutThisTrip data={data} />
       <Faq faq={faq} />
     </Fragment>

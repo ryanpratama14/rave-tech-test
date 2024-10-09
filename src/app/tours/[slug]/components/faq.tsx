@@ -3,7 +3,7 @@
 import { ICONS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import type { FAQ_QUERYResult } from "@/sanity/types";
-import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
+import { Icon } from "@iconify-icon/react";
 import { PortableText } from "next-sanity";
 import Link from "next/link";
 import { useState } from "react";
@@ -14,12 +14,7 @@ export default function Faq({ faq }: Props) {
   const [collapsed, setCollapsed] = useState<string[]>([]);
 
   const toggleCollapse = (key: string) => {
-    setCollapsed(
-      (prev) =>
-        prev.includes(key)
-          ? prev.filter((item) => item !== key) // Collapse if it's already expanded
-          : [...prev, key], // Expand if it's collapsed
-    );
+    setCollapsed((prev) => (prev.includes(key) ? prev.filter((item) => item !== key) : [...prev, key]));
   };
 
   const isSelectedAll = collapsed.length === faq?.faqItems?.length;
@@ -28,7 +23,7 @@ export default function Faq({ faq }: Props) {
     if (isSelectedAll) {
       setCollapsed([]);
     } else {
-      setCollapsed(faq?.faqItems?.map((item) => item._key) || []); // Expand all
+      setCollapsed(faq?.faqItems?.map((item) => item._key) || []);
     }
   };
 
@@ -57,8 +52,8 @@ export default function Faq({ faq }: Props) {
             >
               <button
                 type="button"
-                onClick={() => toggleCollapse(e._key)} // Toggle on click
-                className={cn("animate text-left w-full flex items-center justify-between p-6", {
+                onClick={() => toggleCollapse(e._key)}
+                className={cn("animate text-left w-full flex items-center justify-between gap-4 p-3 lg:p-6", {
                   "bg-[#2D5A7B] text-white": isSelected,
                 })}
               >
@@ -69,7 +64,7 @@ export default function Faq({ faq }: Props) {
               </button>
 
               <section className={cn("animate", { "-translate-y-4 opacity-0 invisible": !isSelected })}>
-                <div className={cn("px-6 py-3", { hidden: !isSelected })}>
+                <div className={cn("lg:px-6 lg:py-3 p-3", { hidden: !isSelected })}>
                   {e.response ? (
                     <PortableText
                       value={e.response}

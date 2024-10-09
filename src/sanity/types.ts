@@ -139,6 +139,111 @@ export type TopTourSummary = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "sightseeingHighlights";
   };
+  itinerary?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "itinerary";
+  };
+};
+
+export type Itinerary = {
+  _id: string;
+  _type: "itinerary";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  topTourSummaryTitle?: string;
+  topTourSummary?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "topTourSummary";
+  };
+  title?: string;
+  description?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  itineraryItems?: Array<{
+    day?: number;
+    experienceType?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "experienceType";
+    };
+    image?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+    title?: string;
+    description?: string;
+    cities?: Array<string>;
+    meals?: Array<string>;
+    accommodation?: Array<string>;
+    arrivalTransfer?: string;
+    departureTransfer?: string;
+    welcome?: string;
+    experiences?: Array<{
+      image?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      title?: string;
+      description?: string;
+      experienceType?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "experienceType";
+      };
+      price?: number;
+      _type: "experience";
+      _key: string;
+    }>;
+    _type: "itineraryItem";
+    _key: string;
+  }>;
+};
+
+export type ExperienceType = {
+  _id: string;
+  _type: "experienceType";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  bgColor?: string;
+  textColor?: string;
 };
 
 export type SightseeingHighlights = {
@@ -284,7 +389,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Faq | TopTourSummary | SightseeingHighlights | TravelHighlights | Slug | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Faq | TopTourSummary | Itinerary | ExperienceType | SightseeingHighlights | TravelHighlights | Slug | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: TOP_TOUR_SUMMARIES_QUERY
@@ -394,9 +499,15 @@ export type TOP_TOUR_SUMMARIES_QUERYResult = Array<{
       _key: string;
     }>;
   } | null;
+  itinerary?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "itinerary";
+  };
 }>;
 // Variable: TOP_TOUR_SUMMARY_QUERY
-// Query: *[_type == "topTourSummary" && slug.current == $slug][0] {    ...,    travelHighlights->{      ...,    },    sightseeingHighlights->{      ...,    }  }
+// Query: *[_type == "topTourSummary" && slug.current == $slug][0] {    ...,    travelHighlights-> {      ...,    },    sightseeingHighlights-> {      ...,    },    itinerary-> {      ...,      itineraryItems[] {        ...,        experienceType->,          experiences[] {          ...,          experienceType->,      },      }    }  }
 export type TOP_TOUR_SUMMARY_QUERYResult = {
   _id: string;
   _type: "topTourSummary";
@@ -502,6 +613,101 @@ export type TOP_TOUR_SUMMARY_QUERYResult = {
       _key: string;
     }>;
   } | null;
+  itinerary: {
+    _id: string;
+    _type: "itinerary";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    topTourSummaryTitle?: string;
+    topTourSummary?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "topTourSummary";
+    };
+    title?: string;
+    description?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    itineraryItems: Array<{
+      day?: number;
+      experienceType: {
+        _id: string;
+        _type: "experienceType";
+        _createdAt: string;
+        _updatedAt: string;
+        _rev: string;
+        title?: string;
+        bgColor?: string;
+        textColor?: string;
+      } | null;
+      image?: {
+        asset?: {
+          _ref: string;
+          _type: "reference";
+          _weak?: boolean;
+          [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+        };
+        hotspot?: SanityImageHotspot;
+        crop?: SanityImageCrop;
+        _type: "image";
+      };
+      title?: string;
+      description?: string;
+      cities?: Array<string>;
+      meals?: Array<string>;
+      accommodation?: Array<string>;
+      arrivalTransfer?: string;
+      departureTransfer?: string;
+      welcome?: string;
+      experiences: Array<{
+        image?: {
+          asset?: {
+            _ref: string;
+            _type: "reference";
+            _weak?: boolean;
+            [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+          };
+          hotspot?: SanityImageHotspot;
+          crop?: SanityImageCrop;
+          _type: "image";
+        };
+        title?: string;
+        description?: string;
+        experienceType: {
+          _id: string;
+          _type: "experienceType";
+          _createdAt: string;
+          _updatedAt: string;
+          _rev: string;
+          title?: string;
+          bgColor?: string;
+          textColor?: string;
+        } | null;
+        price?: number;
+        _type: "experience";
+        _key: string;
+      }> | null;
+      _type: "itineraryItem";
+      _key: string;
+    }> | null;
+  } | null;
 } | null;
 // Variable: FAQ_QUERY
 // Query: *[_type == "faq"][0] {  ...}
@@ -542,7 +748,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"topTourSummary\"] {\n    ...,\n    slug,\n    travelHighlights->{\n      ...,\n    },\n    sightseeingHighlights->{\n      ...,\n    }\n  }": TOP_TOUR_SUMMARIES_QUERYResult;
-    "*[_type == \"topTourSummary\" && slug.current == $slug][0] {\n    ...,\n    travelHighlights->{\n      ...,\n    },\n    sightseeingHighlights->{\n      ...,\n    }\n  }": TOP_TOUR_SUMMARY_QUERYResult;
+    "\n  *[_type == \"topTourSummary\" && slug.current == $slug][0] {\n    ...,\n    travelHighlights-> {\n      ...,\n    },\n    sightseeingHighlights-> {\n      ...,\n    },\n    itinerary-> {\n      ...,\n      itineraryItems[] {\n        ...,\n        experienceType->,\n          experiences[] {\n          ...,\n          experienceType->,\n      },\n      }\n    }\n  }\n": TOP_TOUR_SUMMARY_QUERYResult;
     "*[_type == \"faq\"][0] {\n  ...\n}": FAQ_QUERYResult;
   }
 }

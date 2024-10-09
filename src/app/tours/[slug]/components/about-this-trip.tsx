@@ -8,7 +8,6 @@ import { PortableText } from "next-sanity";
 type Props = { data: TOP_TOUR_SUMMARY_QUERYResult };
 
 export default function AboutThisTrip({ data }: Props) {
-  console.log(data?.sightseeingHighlights?.firstHighlights);
   return (
     <article className="p-shorter xl:px-36 2xl:px-longer5 flex flex-col divide-y-1 divide-gray_lighter">
       <section className="flex flex-col gap-6 py-10 max-lg:text-center w-full">
@@ -99,14 +98,7 @@ const ContentRenderer = ({ data }: { data: SightseeingHighlights["firstHighlight
         return (
           <section key={block._key} className="flex gap-6 text-left sightsee-style">
             <Icon icon={ICONS.itinerary} className="text-green inline-flex" width={40} />
-            <PortableText
-              value={block}
-              components={{
-                block: {
-                  normal: ({ children }) => <small>{children}</small>,
-                },
-              }}
-            />
+            <PortableText value={block} />
           </section>
         );
       })}

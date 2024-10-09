@@ -12,7 +12,7 @@
         "noUnusedLabels": "error"
       },
       "complexity": { "noStaticOnlyClass": "off" },
-      "suspicious": { "noAssignInExpressions": "off" }
+      "suspicious": { "noAssignInExpressions": "off", "noArrayIndexKey": "off" }
     }
   },
   "formatter": {

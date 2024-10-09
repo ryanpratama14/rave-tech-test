@@ -88,5 +88,13 @@ export const topTourSummary = defineType({
       to: [{ type: "sightseeingHighlights" }],
       description: "Link to the related sightseeing highlights document for the tour.",
     }),
+
+    defineField({
+      name: "itinerary",
+      title: "Itinerary",
+      type: "reference",
+      to: [{ type: "itinerary" }],
+      description: "Link to the related itinerary.",
+    }),
   ],
 });
