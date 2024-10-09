@@ -1,6 +1,7 @@
 "use client";
 
 import Img from "@/components/html/img";
+import AdditionalExperiences from "@/components/sections/additional-experiences";
 import { ICONS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
 import { urlFor } from "@/sanity/lib/image";
@@ -28,10 +29,8 @@ export default function Itinerary({ data }: Props) {
     }
   };
 
-  console.log(data?.itinerary);
-
   return (
-    <article className="p-shorter xl:px-36 2xl:px-longer5 flex flex-col gap-8">
+    <article id="itinerary" className="p-shorter xl:px-36 2xl:px-longer5 flex flex-col gap-8">
       <section className="flex flex-col gap-2">
         <h1 className="font-bold text-dark font-source">{data?.itinerary?.title}</h1>
         <div className="text-gray">
@@ -61,8 +60,6 @@ export default function Itinerary({ data }: Props) {
           const isSelected = collapsed.includes(e._key);
           // biome-ignore lint/style/noNonNullAssertion: <explanation>
           const firstAndLastIndex = index === 0 || index === data?.itinerary?.itineraryItems?.length! - 1;
-
-          // console.log(e);
 
           return (
             <section key={e._key} className="rounded-md border-1 border-gray_lighter">
@@ -105,9 +102,9 @@ export default function Itinerary({ data }: Props) {
                     </section>
 
                     <section className="flex gap-4 items-center">
-                      <ItineraryAttribute smallLabel condition={!!e?.arrivalTransfer} icon={ICONS.accommodation} label="Arrival Transfer" />
-                      <ItineraryAttribute smallLabel condition={!!e?.welcome} icon={ICONS.accommodation} label="Welcome" />
-                      <ItineraryAttribute smallLabel condition={!!e?.departureTransfer} icon={ICONS.accommodation} label="Departure Transfer" />
+                      <ItineraryAttribute smallLabel condition={!!e?.arrivalTransfer} icon={ICONS.arrival} label="Arrival Transfer" />
+                      <ItineraryAttribute smallLabel condition={!!e?.welcome} icon={ICONS.welcome} label="Welcome" />
+                      <ItineraryAttribute smallLabel condition={!!e?.departureTransfer} icon={ICONS.departure} label="Departure Transfer" />
                     </section>
                   </section>
 
@@ -118,25 +115,25 @@ export default function Itinerary({ data }: Props) {
               </button>
 
               <section className={cn("animate-longer", { "-translate-y-4 opacity-0 invisible": !isSelected })}>
-                <div className={cn("lg:p-8 p-4", { hidden: !isSelected })}>
+                <div className={cn("lg:p-8 p-4 space-y-4 lg:space-y-6", { hidden: !isSelected })}>
                   <section className="grid lg:grid-cols-2 gap-4 lg:gap-16">
                     <section className="space-y-2 max-lg:order-2">
                       <p className="font-semibold text-gray">Day {e.day}</p>
                       <h2 className="font-source font-bold text-dark">{e?.title}</h2>
                       <p className="text-gray">{e?.description}</p>
 
-                      <section className="lg:py-4 lg:pl-4 space-y-2 lg:space-y-6">
+                      <section className="lg:pt-4 lg:pl-4 space-y-2 lg:space-y-6">
                         <ItineraryAttribute
                           condition={!!e?.arrivalTransfer}
-                          icon={ICONS.accommodation}
+                          icon={ICONS.arrival}
                           label={e?.arrivalTransfer ?? ""}
                           title="Arrival Transfer"
                         />
-                        <ItineraryAttribute condition={!!e?.welcome} icon={ICONS.accommodation} label={e?.welcome ?? ""} title="Welcome" />
+                        <ItineraryAttribute condition={!!e?.welcome} icon={ICONS.welcome} label={e?.welcome ?? ""} title="Welcome" />
 
                         <ItineraryAttribute
                           condition={!!e?.departureTransfer}
-                          icon={ICONS.accommodation}
+                          icon={ICONS.departure}
                           label={e?.departureTransfer ?? ""}
                           title="Departure Transfer"
                         />
@@ -157,6 +154,8 @@ export default function Itinerary({ data }: Props) {
                     </section>
                     {e?.image ? <Img src={urlFor(e.image).url()} alt={e?.title ?? ""} className="object-cover rounded-md aspect-video" /> : null}
                   </section>
+
+                  {e?.experiences?.length ? <AdditionalExperiences data={e?.experiences} /> : null}
                 </div>
               </section>
             </section>
@@ -180,7 +179,7 @@ const ItineraryAttribute = ({
     <section className="flex lg:flex-row flex-col lg:gap-2">
       <section className="flex gap-2 items-center">
         <Icon icon={icon} width={25} className="text-dark" />
-        {title ? <p className="text-dark font-medium">{title}</p> : null}
+        {title ? <p className="text-dark font-semibold">{title}</p> : null}
       </section>
       {smallLabel ? <small>{label}</small> : <p>{label}</p>}
     </section>

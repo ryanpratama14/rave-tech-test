@@ -6,6 +6,13 @@ const IS_CLIENT = typeof window !== "undefined";
 export const cn = (...inputs: ClassValue[]): string => twMerge(clsx(inputs));
 export const loadToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 export const copyData = <T>(data: T): T => structuredClone(data);
+export const truncate = (input: string) => {
+  if (!input) return "";
+  if (input.length <= 136) return input;
+  return `${input.substring(0, 136)}...`;
+};
+
+export const isTruncated = (input: string) => input.length >= 136;
 
 const getBaseUrl = () => {
   if (IS_CLIENT) return `${window.location.origin}`;

@@ -33,7 +33,10 @@ export default function TopTourSummary({ data }: Props) {
                   <h6 className="font-semibold">{e.label}</h6>
                 </section>
                 {isItenerary ? (
-                  <a className="border-b-1 border-red border-dotted hover:border-solid animate w-fit font-bold text-dark/80 hover:text-dark" href="/">
+                  <a
+                    href="#itinerary"
+                    className="border-b-1 border-red border-dotted hover:border-solid animate w-fit font-bold text-dark/80 hover:text-dark"
+                  >
                     <small>{e.description}</small>
                   </a>
                 ) : (

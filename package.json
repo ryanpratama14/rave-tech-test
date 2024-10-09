@@ -12,6 +12,7 @@
     "typegen": "sanity schema extract --path=src/sanity/extract.json && sanity typegen generate"
   },
   "dependencies": {
+    "@headlessui/react": "^2.1.9",
     "@iconify-icon/react": "^2.1.0",
     "@portabletext/react": "^3.1.0",
     "@sanity/icons": "^3.4.0",
@@ -24,6 +25,7 @@
     "react-dom": "^18.3.1",
     "sanity": "3",
     "styled-components": "^6.1",
+    "swiper": "^11.1.14",
     "tailwind-merge": "^2.5.3",
     "zod": "^3.23.8"
   },

@@ -13,7 +13,7 @@ import TopTourSummary from "./components/top-tour-summary";
 type Props = { params: { slug: string } };
 
 export const generateMetadata = async ({ params: { slug } }: Props): Promise<Metadata> => {
-  const data = await client.fetch<TOP_TOUR_SUMMARY_QUERYResult>(TOP_TOUR_SUMMARY_QUERY, { slug });
+  const data = await client.fetch<TOP_TOUR_SUMMARY_QUERYResult>(TOP_TOUR_SUMMARY_QUERY, { slug }, { next: { revalidate: 10 } });
 
   const title = data?.title ?? "";
   const path = data?.slug?.current ? `/tours/${data?.slug?.current}` : "";

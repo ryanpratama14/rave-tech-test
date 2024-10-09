@@ -17,6 +17,7 @@ const config: Config = {
         green: "#4b6b35",
         red_darker: "#a7282e",
         gray_hover: "#F5F5F5",
+        purple_darker: "#503454",
       },
       borderWidth: {
         1: "1px",

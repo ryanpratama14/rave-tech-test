@@ -1,6 +1,10 @@
 import "@/styles/globals.css";
 import type { Metadata } from "next";
 import { Noto_Sans, Source_Serif_4 } from "next/font/google";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import "swiper/css/scrollbar";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
