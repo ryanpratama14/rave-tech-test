@@ -43,33 +43,33 @@ type Props = { data: Data[] | null };
 export default function AdditionalExperiences({ data }: Props) {
   const [openDetail, setOpenDetail] = useState(false);
   const [selectedData, setSelectedData] = useState<Data | null>(null);
-  const [isAtBeginning, setIsAtBeginning] = useState(true);
+  const [isAtBeginning, setIsAtBeginning] = useState(false);
   const [isAtEnd, setIsAtEnd] = useState(false);
 
   return (
     <Fragment>
       <section className="space-y-4 lg:space-y-6">
-        <section className="flex justify-between items-center">
+        <section className="flex justify-between gap-4 items-center">
           <h1 className="text-dark font-bold font-source">Included and optional experiences</h1>
-          <section className="flex gap-4">
+          <section className={cn("flex gap-3", { "lg:hidden": data && data?.length <= 3 })}>
             <button
               disabled={isAtBeginning}
               type="button"
-              className={cn("animate size-10 nav-prev rounded-full flex items-center justify-center bg-gray text-white", {
+              className={cn("animate size-8 lg:size-10 nav-prev rounded-full flex items-center justify-center bg-gray text-white", {
                 "bg-gray/20": isAtBeginning,
               })}
             >
-              <Icon icon={ICONS.arrow2} width={35} rotate={3} />
+              <Icon icon={ICONS.arrow2} width={30} rotate={3} />
             </button>
 
             <button
               disabled={isAtEnd}
               type="button"
-              className={cn("animate size-10 nav-next rounded-full flex items-center justify-center bg-gray text-white", {
+              className={cn("animate size-8 lg:size-10 nav-next rounded-full flex items-center justify-center bg-gray text-white", {
                 "bg-gray/20": isAtEnd,
               })}
             >
-              <Icon icon={ICONS.arrow2} width={35} rotate={1} />
+              <Icon icon={ICONS.arrow2} width={30} rotate={1} />
             </button>
           </section>
         </section>
@@ -87,6 +87,8 @@ export default function AdditionalExperiences({ data }: Props) {
             setIsAtBeginning(swiper.isBeginning);
             setIsAtEnd(swiper.isEnd);
           }}
+          onReachBeginning={() => setIsAtBeginning(true)}
+          onReachEnd={() => setIsAtEnd(true)}
         >
           {data?.map((e) => {
             return (
@@ -102,7 +104,7 @@ export default function AdditionalExperiences({ data }: Props) {
                       {e.experienceType?.title}
                     </small>
                   </section>
-                  <section className="h-56 lg:h-64 xl:h-56 flex flex-col justify-between p-4">
+                  <section className="h-56 lg:h-64 flex flex-col justify-between p-4">
                     <section className="flex flex-col gap-2">
                       <h5 className="text-dark font-source font-bold">{e?.title}</h5>
                       <small className="text-pretty">{truncate(e?.description ?? "")}</small>

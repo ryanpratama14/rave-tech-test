@@ -16,7 +16,7 @@ export default function AboutThisTrip({ data }: Props) {
           <section className="max-lg:mb-6 flex flex-col gap-2 max-lg:items-center max-lg:justify-center max-lg:text-center">
             <h2 className="font-bold text-green font-source">{data?.sightseeingHighlights?.title}</h2>
             {data?.sightseeingHighlights?.cta?.ctaTitle ? (
-              <section className="space-y-2">
+              <section className="space-y-4">
                 <small className="text-gray">{data?.sightseeingHighlights?.cta?.description}</small>
                 <button
                   className="hidden lg:block font-bold w-fit animate px-9 py-3 bg-green hover:bg-white hover:text-green text-white border-1 border-green"
@@ -45,7 +45,7 @@ export default function AboutThisTrip({ data }: Props) {
         <section className="max-lg:mb-6 flex flex-col gap-2 max-lg:items-center max-lg:justify-center max-lg:text-center">
           <h2 className="font-bold text-red_darker font-source">{data?.travelHighlights?.title}</h2>
           {data?.travelHighlights?.cta?.ctaTitle ? (
-            <section className="space-y-2">
+            <section className="space-y-4">
               <small className="text-gray">{data?.travelHighlights?.cta?.description}</small>
               <button
                 className="hidden lg:block font-bold w-fit animate px-9 py-3 bg-red_darker hover:bg-white hover:text-red_darker text-white border-1 border-red_darker"

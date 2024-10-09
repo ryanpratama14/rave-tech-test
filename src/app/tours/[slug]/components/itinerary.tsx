@@ -30,7 +30,7 @@ export default function Itinerary({ data }: Props) {
   };
 
   return (
-    <article id="itinerary" className="p-shorter xl:px-36 2xl:px-longer5 flex flex-col gap-8">
+    <article id="itinerary" className="p-shorter xl:px-36 2xl:px-longer5 flex flex-col lg:gap-6 gap-4">
       <section className="flex flex-col gap-2">
         <h1 className="font-bold text-dark font-source">{data?.itinerary?.title}</h1>
         <div className="text-gray">
