@@ -5,6 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
+import Provider from "./provider";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -28,7 +29,9 @@ const notoSans = Noto_Sans({
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${sourceSerif.variable} ${notoSans.variable}`}>
-      <body>{children}</body>
+      <body>
+        <Provider>{children}</Provider>
+      </body>
     </html>
   );
 }

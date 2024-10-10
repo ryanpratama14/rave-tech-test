@@ -20,8 +20,12 @@ export const TOP_TOUR_SUMMARY_QUERY = defineQuery(`
     sightseeingHighlights-> {
       ...,
     },
+    additionalInfo-> {
+      ...
+    },
     itinerary-> {
       ...,
+     
       itineraryItems[] {
         ...,
         experienceType->,

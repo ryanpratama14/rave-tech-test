@@ -11,4 +11,14 @@ export const ICONS = {
   arrival: "carbon:arrival",
   departure: "carbon:departure",
   welcome: "fluent:people-queue-20-regular",
+  deposit: "carbon:wallet",
+  depositProtection: "material-symbols:airplane-ticket-outline",
+  freeBookingChanges: "fluent:calendar-star-24-regular",
+  dot: "material-symbols:circle",
+  dotVisited: "oui:dot",
+  dotOne: "emojione-monotone:digit-one",
+
+  plane: "ri:plane-line",
+  cruise: "icon-park-outline:cruise",
+  train: "ic:sharp-train",
 };

@@ -102,5 +102,13 @@ export const topTourSummary = defineType({
       to: [{ type: "itinerary" }],
       description: "Link to the related itinerary.",
     }),
+
+    defineField({
+      name: "additionalInfo",
+      title: "Additional Info",
+      type: "reference",
+      to: [{ type: "additionalInfo" }],
+      description: "Link to the related additional info.",
+    }),
   ],
 });

@@ -4,9 +4,10 @@ import Img from "@/components/html/img";
 import AdditionalExperiences from "@/components/sections/additional-experiences";
 import { ICONS } from "@/lib/constants";
 import { cn } from "@/lib/utils";
-import { urlFor } from "@/sanity/lib/image";
+import { getUrlFile, urlFor } from "@/sanity/lib/image";
 import type { TOP_TOUR_SUMMARY_QUERYResult } from "@/sanity/types";
 import { Icon } from "@iconify-icon/react";
+import { useQuery } from "@tanstack/react-query";
 import { PortableText } from "next-sanity";
 import { Fragment, useState } from "react";
 
@@ -14,6 +15,7 @@ type Props = { data: TOP_TOUR_SUMMARY_QUERYResult };
 
 export default function Itinerary({ data }: Props) {
   const [collapsed, setCollapsed] = useState<string[]>([]);
+  const [isDownloaded, setIsDownloaded] = useState(false);
 
   const toggleCollapse = (key: string) => {
     setCollapsed((prev) => (prev.includes(key) ? prev.filter((item) => item !== key) : [...prev, key]));
@@ -27,6 +29,41 @@ export default function Itinerary({ data }: Props) {
     } else {
       setCollapsed(data?.itinerary?.itineraryItems?.map((item) => item._key) || []);
     }
+  };
+
+  const fileUrl = data?.itinerary?.file?.asset?._ref ? getUrlFile(data?.itinerary?.file?.asset?._ref) : "null";
+
+  const { data: file } = useQuery({
+    queryKey: ["file"],
+    queryFn: async () => {
+      const res = await fetch(fileUrl);
+      return await res.blob();
+    },
+  });
+
+  const handlePrint = () => {
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    const printWindow = window.open(url);
+
+    if (printWindow) {
+      printWindow.onload = () => {
+        printWindow.print();
+      };
+    }
+  };
+
+  const handleDownload = async () => {
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${data?.title}.pdf`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    setIsDownloaded(true);
   };
 
   return (
@@ -47,10 +84,21 @@ export default function Itinerary({ data }: Props) {
         </div>
       </section>
 
-      <section className="self-end">
+      <section className={cn("flex justify-between items-center", { "justify-end": !file })}>
+        {file ? (
+          <section className="flex items-center gap-4 text-[#2D5A7B]">
+            <button disabled={isDownloaded} type="button" className="flex items-center gap-1 font-bold" onClick={handleDownload}>
+              <Icon icon={isDownloaded ? ICONS.check : "ic:sharp-sim-card-download"} width={30} />
+              Download itinerary
+            </button>
+            <button type="button" className="flex items-center gap-1 font-bold" onClick={handlePrint}>
+              <Icon icon="ic:baseline-print" width={30} />
+              Print itinerary
+            </button>
+          </section>
+        ) : null}
         <button type="button" onClick={handleExpandCollapseAll} className="font-semibold flex items-center gap-2">
           {isSelectedAll ? "Collapse all days" : "Expand all days"}
-
           <Icon icon={ICONS.arrow} width={25} rotate={2} className={cn("animate", { "rotate-180": isSelectedAll })} />
         </button>
       </section>

@@ -36,6 +36,14 @@ export const itinerary = defineType({
     }),
 
     defineField({
+      name: "file",
+      title: "File",
+      type: "file",
+      description: "Example: 'Best Of Italy.pdf'",
+      options: { accept: "application/pdf" },
+    }),
+
+    defineField({
       name: "itineraryItems",
       title: "Itinerary Items",
       type: "array",

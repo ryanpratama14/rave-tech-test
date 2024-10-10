@@ -39,28 +39,6 @@ export type SanityImageDimensions = {
   aspectRatio?: number;
 };
 
-export type SanityFileAsset = {
-  _id: string;
-  _type: "sanity.fileAsset";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  originalFilename?: string;
-  label?: string;
-  title?: string;
-  description?: string;
-  altText?: string;
-  sha1hash?: string;
-  extension?: string;
-  mimeType?: string;
-  size?: number;
-  assetId?: string;
-  uploadId?: string;
-  path?: string;
-  url?: string;
-  source?: SanityAssetSourceData;
-};
-
 export type Geopoint = {
   _type: "geopoint";
   lat?: number;
@@ -146,6 +124,60 @@ export type TopTourSummary = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "itinerary";
   };
+  additionalInfo?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "additionalInfo";
+  };
+};
+
+export type AdditionalInfo = {
+  _id: string;
+  _type: "additionalInfo";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  topTourSummaryTitle?: string;
+  topTourSummary?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "topTourSummary";
+  };
+  cta?: Array<{
+    children?: Array<{
+      marks?: Array<string>;
+      text?: string;
+      _type: "span";
+      _key: string;
+    }>;
+    style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+    listItem?: "bullet" | "number";
+    markDefs?: Array<{
+      href?: string;
+      _type: "link";
+      _key: string;
+    }>;
+    level?: number;
+    _type: "block";
+    _key: string;
+  }>;
+  depositAmount?: number;
+  depositProtection?: boolean;
+  freeBookingChanges?: boolean;
+  mapImageTitle?: string;
+  mapImage?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+    };
+    hotspot?: SanityImageHotspot;
+    crop?: SanityImageCrop;
+    _type: "image";
+  };
 };
 
 export type Itinerary = {
@@ -180,6 +212,15 @@ export type Itinerary = {
     _type: "block";
     _key: string;
   }>;
+  file?: {
+    asset?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+    };
+    _type: "file";
+  };
   itineraryItems?: Array<{
     day?: number;
     experienceType?: {
@@ -245,6 +286,28 @@ export type ExperienceType = {
   title?: string;
   bgColor?: string;
   textColor?: string;
+};
+
+export type SanityFileAsset = {
+  _id: string;
+  _type: "sanity.fileAsset";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  originalFilename?: string;
+  label?: string;
+  title?: string;
+  description?: string;
+  altText?: string;
+  sha1hash?: string;
+  extension?: string;
+  mimeType?: string;
+  size?: number;
+  assetId?: string;
+  uploadId?: string;
+  path?: string;
+  url?: string;
+  source?: SanityAssetSourceData;
 };
 
 export type SightseeingHighlights = {
@@ -391,7 +454,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Faq | TopTourSummary | Itinerary | ExperienceType | SightseeingHighlights | TravelHighlights | Slug | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | Geopoint | Faq | TopTourSummary | AdditionalInfo | Itinerary | ExperienceType | SanityFileAsset | SightseeingHighlights | TravelHighlights | Slug | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/lib/queries.ts
 // Variable: TOP_TOUR_SUMMARIES_QUERY
@@ -509,9 +572,15 @@ export type TOP_TOUR_SUMMARIES_QUERYResult = Array<{
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "itinerary";
   };
+  additionalInfo?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "additionalInfo";
+  };
 }>;
 // Variable: TOP_TOUR_SUMMARY_QUERY
-// Query: *[_type == "topTourSummary" && slug.current == $slug][0] {    ...,    travelHighlights-> {      ...,    },    sightseeingHighlights-> {      ...,    },    itinerary-> {      ...,      itineraryItems[] {        ...,        experienceType->,          experiences[] {          ...,          experienceType->,      },      }    }  }
+// Query: *[_type == "topTourSummary" && slug.current == $slug][0] {    ...,    travelHighlights-> {      ...,    },    sightseeingHighlights-> {      ...,    },    additionalInfo-> {      ...    },    itinerary-> {      ...,           itineraryItems[] {        ...,        experienceType->,          experiences[] {          ...,          experienceType->,      },      }    }  }
 export type TOP_TOUR_SUMMARY_QUERYResult = {
   _id: string;
   _type: "topTourSummary";
@@ -651,6 +720,15 @@ export type TOP_TOUR_SUMMARY_QUERYResult = {
       _type: "block";
       _key: string;
     }>;
+    file?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.fileAsset";
+      };
+      _type: "file";
+    };
     itineraryItems: Array<{
       day?: number;
       experienceType: {
@@ -714,6 +792,53 @@ export type TOP_TOUR_SUMMARY_QUERYResult = {
       _key: string;
     }> | null;
   } | null;
+  additionalInfo: {
+    _id: string;
+    _type: "additionalInfo";
+    _createdAt: string;
+    _updatedAt: string;
+    _rev: string;
+    topTourSummaryTitle?: string;
+    topTourSummary?: {
+      _ref: string;
+      _type: "reference";
+      _weak?: boolean;
+      [internalGroqTypeReferenceTo]?: "topTourSummary";
+    };
+    cta?: Array<{
+      children?: Array<{
+        marks?: Array<string>;
+        text?: string;
+        _type: "span";
+        _key: string;
+      }>;
+      style?: "blockquote" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "normal";
+      listItem?: "bullet" | "number";
+      markDefs?: Array<{
+        href?: string;
+        _type: "link";
+        _key: string;
+      }>;
+      level?: number;
+      _type: "block";
+      _key: string;
+    }>;
+    depositAmount?: number;
+    depositProtection?: boolean;
+    freeBookingChanges?: boolean;
+    mapImageTitle?: string;
+    mapImage?: {
+      asset?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+      };
+      hotspot?: SanityImageHotspot;
+      crop?: SanityImageCrop;
+      _type: "image";
+    };
+  } | null;
 } | null;
 // Variable: FAQ_QUERY
 // Query: *[_type == "faq"][0] {  ...}
@@ -754,7 +879,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"topTourSummary\"] {\n    ...,\n    slug,\n    travelHighlights->{\n      ...,\n    },\n    sightseeingHighlights->{\n      ...,\n    }\n  }": TOP_TOUR_SUMMARIES_QUERYResult;
-    "\n  *[_type == \"topTourSummary\" && slug.current == $slug][0] {\n    ...,\n    travelHighlights-> {\n      ...,\n    },\n    sightseeingHighlights-> {\n      ...,\n    },\n    itinerary-> {\n      ...,\n      itineraryItems[] {\n        ...,\n        experienceType->,\n          experiences[] {\n          ...,\n          experienceType->,\n      },\n      }\n    }\n  }\n": TOP_TOUR_SUMMARY_QUERYResult;
+    "\n  *[_type == \"topTourSummary\" && slug.current == $slug][0] {\n    ...,\n    travelHighlights-> {\n      ...,\n    },\n    sightseeingHighlights-> {\n      ...,\n    },\n    additionalInfo-> {\n      ...\n    },\n    itinerary-> {\n      ...,\n     \n      itineraryItems[] {\n        ...,\n        experienceType->,\n          experiences[] {\n          ...,\n          experienceType->,\n      },\n      }\n    }\n  }\n": TOP_TOUR_SUMMARY_QUERYResult;
     "*[_type == \"faq\"][0] {\n  ...\n}": FAQ_QUERYResult;
   }
 }

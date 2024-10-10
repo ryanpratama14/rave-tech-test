@@ -6,6 +6,7 @@ import type { FAQ_QUERYResult, TOP_TOUR_SUMMARY_QUERYResult } from "@/sanity/typ
 import type { Metadata } from "next";
 import { Fragment } from "react";
 import AboutThisTrip from "./components/about-this-trip";
+import AdditionalInfo from "./components/additional-info";
 import Faq from "./components/faq";
 import Itinerary from "./components/itinerary";
 import TopTourSummary from "./components/top-tour-summary";
@@ -29,6 +30,7 @@ export default async function TourPage({ params: { slug } }: Props) {
   return (
     <Fragment>
       <TopTourSummary data={data} />
+      <AdditionalInfo data={data} />
       <Itinerary data={data} />
       <AboutThisTrip data={data} />
       <Faq faq={faq} />
