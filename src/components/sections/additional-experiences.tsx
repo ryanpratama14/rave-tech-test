@@ -104,7 +104,7 @@ export default function AdditionalExperiences({ data }: Props) {
                     {e.experienceType?.title}
                   </small>
                 </section>
-                <section className="h-56 lg:h-64 flex flex-col justify-between p-4">
+                <section className="h-60 lg:h-64 flex flex-col justify-between p-3 lg:p-4">
                   <section className="flex flex-col gap-2">
                     <h5 className="text-dark font-source font-bold">{e?.title}</h5>
                     <small className="text-pretty">{truncate(e?.description ?? "")}</small>
@@ -156,7 +156,7 @@ export default function AdditionalExperiences({ data }: Props) {
           ) : null}
 
           <section className="grid grid-cols-2 lg:grid-cols-3 gap-8 text-dark">
-            <section className={cn("space-y-2 lg:col-span-2", { "lg:col-span-3": !selectedData?.price })}>
+            <section className={cn("space-y-2 lg:col-span-2", { "col-span-2 lg:col-span-3": !selectedData?.price })}>
               <h2>Experience Info</h2>
               <p className="text-pretty">{selectedData?.description}</p>
             </section>
