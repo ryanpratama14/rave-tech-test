@@ -6,7 +6,7 @@ import type { TOP_TOUR_SUMMARY_QUERYResult } from "@/sanity/types";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { PortableText } from "next-sanity";
 import Link from "next/link";
-// import InnerImageZoom from "react-inner-image-zoom";
+import InnerImageZoom from "react-inner-image-zoom";
 
 type Props = { data: TOP_TOUR_SUMMARY_QUERYResult };
 
@@ -45,10 +45,10 @@ export default function AdditionalInfo({ data }: Props) {
 
       <section className="flex flex-col gap-4 text-center lg:pt-10 pt-shorter">
         <h1 className="font-bold font-source text-dark">{data?.additionalInfo?.mapImageTitle}</h1>
-        <section className="grid grid-cols-3 shadow-md bg-white">
+        <section className="grid grid-cols-3 shadow-md py-10 bg-white">
           {data?.additionalInfo?.mapImage ? (
             <section className="col-span-2">
-              {/* <InnerImageZoom src={urlFor(data?.additionalInfo?.mapImage).url()} zoomSrc={urlFor(data?.additionalInfo?.mapImage).url()} /> */}
+              <InnerImageZoom src={urlFor(data?.additionalInfo?.mapImage).url()} zoomSrc={urlFor(data?.additionalInfo?.mapImage).url()} />
             </section>
           ) : null}
 

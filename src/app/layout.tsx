@@ -6,7 +6,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
 import Provider from "./provider";
-import "react-inner-image-zoom/lib/InnerImageZoom/styles.css";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
