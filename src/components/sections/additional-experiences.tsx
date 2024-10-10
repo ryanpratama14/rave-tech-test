@@ -44,7 +44,7 @@ type Props = { data: Data[] | null };
 export default function AdditionalExperiences({ data }: Props) {
   const [openDetail, setOpenDetail] = useState(false);
   const [selectedData, setSelectedData] = useState<Data | null>(null);
-  const [isAtBeginning, setIsAtBeginning] = useState(false);
+  const [isAtBeginning, setIsAtBeginning] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
 
   return (
