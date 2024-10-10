@@ -20,6 +20,13 @@ export const sightseeingHighlights = defineType({
     }),
 
     defineField({
+      name: "menuTitle",
+      title: "Menu Title",
+      type: "string",
+      description: "Example: 'About this trip'",
+    }),
+
+    defineField({
       name: "title",
       title: "Title",
       type: "string",

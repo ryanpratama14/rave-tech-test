@@ -199,6 +199,11 @@
         "type": "reference"
       },
       {
+        "description": "Example: 'About this trip'",
+        "name": "menuTitle",
+        "type": "string"
+      },
+      {
         "description": "Example: 'Sightseeing highlights'",
         "name": "title",
         "type": "string"

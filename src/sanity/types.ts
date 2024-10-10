@@ -260,6 +260,7 @@ export type SightseeingHighlights = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "topTourSummary";
   };
+  menuTitle?: string;
   title?: string;
   cta?: {
     ctaTitle?: string;
@@ -458,6 +459,7 @@ export type TOP_TOUR_SUMMARIES_QUERYResult = Array<{
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "topTourSummary";
     };
+    menuTitle?: string;
     title?: string;
     cta?: {
       ctaTitle?: string;
@@ -573,6 +575,7 @@ export type TOP_TOUR_SUMMARY_QUERYResult = {
       _weak?: boolean;
       [internalGroqTypeReferenceTo]?: "topTourSummary";
     };
+    menuTitle?: string;
     title?: string;
     cta?: {
       ctaTitle?: string;

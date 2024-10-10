@@ -11,7 +11,7 @@ export default function AboutThisTrip({ data }: Props) {
   return (
     <article className="p-shorter xl:px-36 2xl:px-longer5 flex flex-col divide-y-1 divide-gray_lighter">
       <section className="flex flex-col gap-6 py-10 max-lg:text-center w-full">
-        <h1 className="text-dark font-bold font-source">About this trip</h1>
+        <h1 className="text-dark font-bold font-source">{data?.sightseeingHighlights?.menuTitle}</h1>
         <section className="grid lg:grid-cols-3 gap-4">
           <section className="max-lg:mb-6 flex flex-col gap-2 max-lg:items-center max-lg:justify-center max-lg:text-center">
             <h2 className="font-bold text-green font-source">{data?.sightseeingHighlights?.title}</h2>
