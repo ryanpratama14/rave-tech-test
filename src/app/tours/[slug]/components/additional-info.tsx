@@ -48,7 +48,11 @@ export default function AdditionalInfo({ data }: Props) {
         <section className="grid lg:grid-cols-3 gap-4 lg:gap-6 shadow-md bg-white">
           {data?.additionalInfo?.mapImage ? (
             <section className="lg:col-span-2">
-              <InnerImageZoom src={urlFor(data?.additionalInfo?.mapImage).url()} zoomSrc={urlFor(data?.additionalInfo?.mapImage).url()} />
+              <InnerImageZoom
+                src={urlFor(data?.additionalInfo?.mapImage).url()}
+                className="size-full"
+                zoomSrc={urlFor(data?.additionalInfo?.mapImage).url()}
+              />
             </section>
           ) : null}
 
