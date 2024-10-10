@@ -66,7 +66,7 @@ export default function Itinerary({ data }: Props) {
               <button
                 type="button"
                 onClick={() => toggleCollapse(e._key)}
-                className={cn("flex items-center animate w-full lg:h-[7.5rem]", {
+                className={cn("flex items-center animate w-full lg:h-[7.5rem] z-50", {
                   "border-b-1 border-gray_lighter bg-gray_hover text-white": isSelected,
                   "lg:h-[10rem]": firstAndLastIndex,
                 })}
@@ -114,8 +114,8 @@ export default function Itinerary({ data }: Props) {
                 </section>
               </button>
 
-              <section className={cn("animate-longer", { "-translate-y-4 opacity-0 invisible": !isSelected })}>
-                <div className={cn("lg:p-8 p-4 space-y-4 lg:space-y-6", { hidden: !isSelected })}>
+              <section className={cn("animate h-full", { "h-0 invisible": !isSelected })}>
+                <div className={cn("space-y-4 lg:space-y-6 lg:p-8 p-4 animate", { "-translate-y-6 invisible opacity-0": !isSelected })}>
                   <section className="grid lg:grid-cols-2 gap-4 lg:gap-16">
                     <section className="space-y-2 max-lg:order-2">
                       <p className="font-semibold text-gray">Day {e.day}</p>
@@ -154,7 +154,15 @@ export default function Itinerary({ data }: Props) {
                         />
                       </section>
                     </section>
-                    {e?.image ? <Img src={urlFor(e.image).url()} alt={e?.title ?? ""} className="object-cover rounded-md aspect-video" /> : null}
+                    {e?.image ? (
+                      <Img
+                        src={urlFor(e.image).url()}
+                        alt={e?.title ?? ""}
+                        className={cn("object-cover rounded-md aspect-video transition-all duration-1000", {
+                          "-translate-y-12 opacity-0 invisible": !isSelected,
+                        })}
+                      />
+                    ) : null}
                   </section>
 
                   {e?.experiences?.length ? <AdditionalExperiences data={e?.experiences} /> : null}

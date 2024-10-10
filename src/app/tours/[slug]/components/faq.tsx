@@ -63,8 +63,8 @@ export default function Faq({ faq }: Props) {
                 </div>
               </button>
 
-              <section className={cn("animate", { "-translate-y-4 opacity-0 invisible": !isSelected })}>
-                <div className={cn("lg:px-6 lg:py-3 p-3", { hidden: !isSelected })}>
+              <section className={cn("animate h-full", { "h-0 invisible": !isSelected })}>
+                <div className={cn("lg:px-6 lg:py-3 p-3 animate", { "-translate-y-2 invisible opacity-0": !isSelected })}>
                   {e.response ? (
                     <PortableText
                       value={e.response}
