@@ -130,20 +130,22 @@ export default function Itinerary({ data }: Props) {
                           title="Arrival Transfer"
                         />
                         <ItineraryAttribute condition={!!e?.welcome} icon={ICONS.welcome} label={e?.welcome ?? ""} title="Welcome" />
-
                         <ItineraryAttribute
                           condition={!!e?.departureTransfer}
                           icon={ICONS.departure}
                           label={e?.departureTransfer ?? ""}
                           title="Departure Transfer"
                         />
-
                         <ItineraryAttribute
                           condition={!!e?.accommodation?.length}
                           icon={ICONS.accommodation}
                           label={e?.accommodation?.join(" / ") ?? ""}
                           title="Accommodation"
+                          additionalInfo={
+                            e?.accommodation?.length && e?.accommodation?.length > 1 ? "Your hotel will be dependent on your departure date" : ""
+                          }
                         />
+
                         <ItineraryAttribute
                           condition={!!e?.meals?.length}
                           icon={ICONS.meals}
@@ -172,16 +174,20 @@ const ItineraryAttribute = ({
   icon,
   title,
   smallLabel,
-}: { condition: boolean; label: string; icon: string; title?: string; smallLabel?: boolean }) => {
+  additionalInfo,
+}: { condition: boolean; label: string; icon: string; title?: string; smallLabel?: boolean; additionalInfo?: string }) => {
   if (!condition) return null;
 
   return (
-    <section className="flex lg:flex-row flex-col lg:gap-2">
-      <section className="flex gap-2 items-center">
-        <Icon icon={icon} width={25} className="text-dark" />
-        {title ? <p className="text-dark font-semibold">{title}</p> : null}
+    <section className="flex gap-2">
+      <Icon icon={icon} width={25} className="text-dark" />
+      <section className="space-y-2">
+        <div>
+          <span className="text-dark font-semibold">{title}</span>
+          {"  "} <span>{smallLabel ? <small>{label}</small> : label}</span>
+        </div>
+        {additionalInfo ? <small className="text-gray text-xs">{additionalInfo}</small> : null}
       </section>
-      {smallLabel ? <small>{label}</small> : <p>{label}</p>}
     </section>
   );
 };

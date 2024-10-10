@@ -732,6 +732,13 @@
         },
         "optional": true
       },
+      "cities": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "accommodation": {
         "type": "objectAttribute",
         "value": {

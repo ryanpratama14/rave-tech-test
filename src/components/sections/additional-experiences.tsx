@@ -8,6 +8,7 @@ import { Mousewheel, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import Dialog from "../dialog";
 import Img from "../html/img";
+import Tooltip from "../tooltip";
 
 type Data = {
   image?: {
@@ -126,6 +127,14 @@ export default function AdditionalExperiences({ data }: Props) {
                     {e?.price ? (
                       <section className="flex items-center justify-between text-dark">
                         <small className="font-bold">Additional cost applies</small>
+
+                        <Tooltip
+                          classNameContent="w-72 group-hover:-top-24 -top-16 right-0"
+                          content="Optional Experiences are enchancments to your tour"
+                          contentTitle="Optional experiences"
+                        >
+                          <Icon icon={ICONS.info} width={25} />
+                        </Tooltip>
                       </section>
                     ) : (
                       <section className="text-purple_darker flex gap-2 items-center">

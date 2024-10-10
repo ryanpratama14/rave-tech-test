@@ -124,6 +124,7 @@ export type TopTourSummary = {
   promoTitle?: string;
   promoDescription?: string;
   travel?: string;
+  cities?: string;
   accommodation?: string;
   meals?: string;
   tripCode?: string;
@@ -418,6 +419,7 @@ export type TOP_TOUR_SUMMARIES_QUERYResult = Array<{
   promoTitle?: string;
   promoDescription?: string;
   travel?: string;
+  cities?: string;
   accommodation?: string;
   meals?: string;
   tripCode?: string;
@@ -532,6 +534,7 @@ export type TOP_TOUR_SUMMARY_QUERYResult = {
   promoTitle?: string;
   promoDescription?: string;
   travel?: string;
+  cities?: string;
   accommodation?: string;
   meals?: string;
   tripCode?: string;

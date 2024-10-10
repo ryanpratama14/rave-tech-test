@@ -57,6 +57,12 @@ export const topTourSummary = defineType({
       description: "Travel details like '13 days, 2 countries and 15 cities'",
     }),
     defineField({
+      name: "cities",
+      title: "Cities",
+      type: "string",
+      description: "Example: 'Italy, Vatican City, Rome, Vatican, Pompeii...'",
+    }),
+    defineField({
       name: "accommodation",
       title: "Accommodation",
       type: "string",

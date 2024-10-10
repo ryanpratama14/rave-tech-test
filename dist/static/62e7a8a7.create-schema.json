@@ -59,6 +59,11 @@
         "type": "string"
       },
       {
+        "description": "Example: 'Italy, Vatican City, Rome, Vatican, Pompeii...'",
+        "name": "cities",
+        "type": "string"
+      },
+      {
         "description": "Accommodation information like '12 nights'",
         "name": "accommodation",
         "type": "string"

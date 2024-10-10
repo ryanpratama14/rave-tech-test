@@ -1,4 +1,5 @@
 import Img from "@/components/html/img";
+import Tooltip from "@/components/tooltip";
 import { ICONS } from "@/lib/constants";
 import { urlFor } from "@/sanity/lib/image";
 import type { TOP_TOUR_SUMMARY_QUERYResult } from "@/sanity/types";
@@ -24,7 +25,7 @@ export default function TopTourSummary({ data }: Props) {
         <section className="grid grid-cols-2 gap-2 lg:gap-6">
           {SUMMARIES.map((e) => {
             const isItenerary = e.label === "Itinerary";
-            // const isTravel = e.label === "Travel";
+            const isTravel = e.label === "Travel";
 
             return (
               <section key={e.icon} className="flex flex-col lg:gap-2">
@@ -40,7 +41,14 @@ export default function TopTourSummary({ data }: Props) {
                     <small>{e.description}</small>
                   </a>
                 ) : (
-                  <p>{e.description}</p>
+                  <p>
+                    {e.description} {"  "}
+                    {isTravel ? (
+                      <Tooltip classNameContent="w-[26rem]" content={data?.cities ?? ""}>
+                        <Icon icon={ICONS.info} width={20} />
+                      </Tooltip>
+                    ) : null}
+                  </p>
                 )}
               </section>
             );
