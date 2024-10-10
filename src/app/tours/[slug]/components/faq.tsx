@@ -29,7 +29,7 @@ export default function Faq({ faq }: Props) {
 
   return (
     <article className="xl:px-36 2xl:px-longer5 p-shorter flex flex-col lg:gap-6 gap-4 text-dark">
-      <h1 className="font-bold font-source">{faq?.title}</h1>
+      <h1>{faq?.title}</h1>
 
       <section className="self-end">
         <button type="button" onClick={handleExpandCollapseAll} className="font-bold flex items-center gap-2">

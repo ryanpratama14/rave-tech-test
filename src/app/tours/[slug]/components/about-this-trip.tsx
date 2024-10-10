@@ -11,10 +11,10 @@ export default function AboutThisTrip({ data }: Props) {
   return (
     <article className="p-shorter xl:px-36 2xl:px-longer5 flex flex-col divide-y-1 divide-gray_lighter">
       <section className="flex flex-col gap-6 py-10 max-lg:text-center w-full">
-        <h1 className="text-dark font-bold font-source">{data?.sightseeingHighlights?.menuTitle}</h1>
+        <h1>{data?.sightseeingHighlights?.menuTitle}</h1>
         <section className="grid lg:grid-cols-3 gap-4">
           <section className="max-lg:mb-6 flex flex-col gap-2 max-lg:items-center max-lg:justify-center max-lg:text-center">
-            <h2 className="font-bold text-green font-source">{data?.sightseeingHighlights?.title}</h2>
+            <h2 className="text-green">{data?.sightseeingHighlights?.title}</h2>
             {data?.sightseeingHighlights?.cta?.ctaTitle ? (
               <section className="space-y-4">
                 <small className="text-gray">{data?.sightseeingHighlights?.cta?.description}</small>
@@ -43,7 +43,7 @@ export default function AboutThisTrip({ data }: Props) {
 
       <section className="grid lg:grid-cols-3 gap-4 py-10">
         <section className="max-lg:mb-6 flex flex-col gap-2 max-lg:items-center max-lg:justify-center max-lg:text-center">
-          <h2 className="font-bold text-red_darker font-source">{data?.travelHighlights?.title}</h2>
+          <h2 className="text-red_darker">{data?.travelHighlights?.title}</h2>
           {data?.travelHighlights?.cta?.ctaTitle ? (
             <section className="space-y-4">
               <small className="text-gray">{data?.travelHighlights?.cta?.description}</small>

@@ -66,7 +66,7 @@ export default function AdditionalExperiences({ data }: Props) {
         onReachEnd={() => setIsAtEnd(true)}
       >
         <section className="flex items-center justify-between absolute gap-4 top-0 w-full">
-          <h1 className="text-dark font-bold font-source">Included and optional experiences</h1>
+          <h1>Included and optional experiences</h1>
           <section className={cn("flex gap-3 items-center", { "lg:hidden": data && data?.length <= 3 })}>
             <button
               disabled={isAtBeginning}
@@ -150,28 +150,28 @@ export default function AdditionalExperiences({ data }: Props) {
 
       <Dialog open={openDetail} onClose={() => setOpenDetail(false)}>
         <section className="space-y-6">
-          <h1 className="font-bold text-dark font-source">{selectedData?.title}</h1>
+          <h1>{selectedData?.title}</h1>
           {selectedData?.image ? (
             <Img src={urlFor(selectedData.image).url()} alt={selectedData.title ?? ""} className="rounded-md aspect-video object-cover" />
           ) : null}
 
           <section className="grid grid-cols-2 lg:grid-cols-3 gap-8 text-dark">
             <section className={cn("space-y-2 lg:col-span-2", { "lg:col-span-3": !selectedData?.price })}>
-              <h2 className="font-bold font-source">Experience Info</h2>
+              <h2>Experience Info</h2>
               <p className="text-pretty">{selectedData?.description}</p>
             </section>
 
             {selectedData?.price ? (
               <section className="space-y-4">
                 <section>
-                  <h2 className="font-bold font-source">Pricing Info</h2>
+                  <h2>Pricing Info</h2>
                   <small className="font-bold">Adults</small>
                   <h5 className="font-bold">
                     {new Intl.NumberFormat("en-US", { style: "currency", currency: "EUR" }).format(selectedData?.price ?? 0)}
                   </h5>
                 </section>
                 <section>
-                  <h2 className="font-bold font-source">How To Book?</h2>
+                  <h2>How To Book?</h2>
                   <small>Optional Experiences are enhancements to your tour and can be booked through your Travel Director while on tour.</small>
                 </section>
               </section>

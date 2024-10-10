@@ -69,7 +69,7 @@ export default function Itinerary({ data }: Props) {
   return (
     <article id="itinerary" className="p-shorter xl:px-36 2xl:px-longer5 flex flex-col lg:gap-6 gap-4">
       <section className="flex flex-col gap-2">
-        <h1 className="font-bold text-dark font-source">{data?.itinerary?.title}</h1>
+        <h1>{data?.itinerary?.title}</h1>
         <div className="text-gray">
           {data?.itinerary?.description ? (
             <PortableText
@@ -167,7 +167,7 @@ export default function Itinerary({ data }: Props) {
                   <section className="grid lg:grid-cols-2 gap-4 lg:gap-16">
                     <section className="space-y-2 max-lg:order-2">
                       <p className="font-semibold text-gray">Day {e.day}</p>
-                      <h2 className="font-source font-bold text-dark">{e?.title}</h2>
+                      <h2>{e?.title}</h2>
                       <p className="text-gray">{e?.description}</p>
 
                       <section className="lg:pt-4 lg:pl-4 space-y-2 lg:space-y-6">

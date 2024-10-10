@@ -44,7 +44,7 @@ export default function AdditionalInfo({ data }: Props) {
       </section>
 
       <section className="flex flex-col gap-4 text-center lg:pt-10 pt-shorter">
-        <h1 className="font-bold font-source text-dark">{data?.additionalInfo?.mapImageTitle}</h1>
+        <h1 className=" text-dark">{data?.additionalInfo?.mapImageTitle}</h1>
         <section className="grid lg:grid-cols-3 gap-4 lg:gap-6 shadow-md bg-white">
           {data?.additionalInfo?.mapImage ? (
             <section className="lg:col-span-2">

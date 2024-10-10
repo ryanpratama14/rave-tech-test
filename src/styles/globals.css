@@ -10,10 +10,10 @@
     @apply font-sans;
   }
   h1 {
-    @apply text-2xl lg:text-3xl;
+    @apply text-2xl lg:text-3xl font-bold font-source text-dark;
   }
   h2 {
-    @apply text-2xl;
+    @apply text-2xl font-bold font-source;
   }
   p {
     @apply text-[14px] lg:text-base;

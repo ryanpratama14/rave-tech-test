@@ -20,7 +20,7 @@ export default function TopTourSummary({ data }: Props) {
       {data?.image ? <Img src={urlFor(data.image).url()} alt={data?.image?.alt ?? ""} className="size-full object-cover overflow-hidden" /> : null}
 
       <section className="p-shorter lg:py-10 lg:px-16 xl:pr-32 text-dark flex flex-col gap-4 lg:gap-6 justify-center">
-        <h1 className="font-bold font-source">{data?.title}</h1>
+        <h1>{data?.title}</h1>
         <p>{data?.description}</p>
         <section className="grid grid-cols-2 gap-2 lg:gap-6">
           {SUMMARIES.map((e) => {
