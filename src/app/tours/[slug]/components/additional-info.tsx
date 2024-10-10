@@ -45,14 +45,14 @@ export default function AdditionalInfo({ data }: Props) {
 
       <section className="flex flex-col gap-4 text-center lg:pt-10 pt-shorter">
         <h1 className="font-bold font-source text-dark">{data?.additionalInfo?.mapImageTitle}</h1>
-        <section className="grid grid-cols-3 shadow-md bg-white">
+        <section className="grid lg:grid-cols-3 gap-4 lg:gap-6 shadow-md bg-white">
           {data?.additionalInfo?.mapImage ? (
-            <section className="col-span-2">
+            <section className="lg:col-span-2">
               <InnerImageZoom src={urlFor(data?.additionalInfo?.mapImage).url()} zoomSrc={urlFor(data?.additionalInfo?.mapImage).url()} />
             </section>
           ) : null}
 
-          <section className="flex flex-col gap-4 text-left">
+          <section className="flex flex-wrap lg:flex-col gap-2 lg:gap-4 text-left p-4 lg:p-6">
             <p>Legend</p>
             {[
               { icon: ICONS.dot, color: "#4B6B35", label: "Start Location" },
