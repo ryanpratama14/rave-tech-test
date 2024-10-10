@@ -1,12 +1,12 @@
 "use client";
 
-import Img from "@/components/html/img";
 import { ICONS } from "@/lib/constants";
 import { urlFor } from "@/sanity/lib/image";
 import type { TOP_TOUR_SUMMARY_QUERYResult } from "@/sanity/types";
 import { Icon } from "@iconify-icon/react/dist/iconify.mjs";
 import { PortableText } from "next-sanity";
 import Link from "next/link";
+import InnerImageZoom from "react-inner-image-zoom";
 
 type Props = { data: TOP_TOUR_SUMMARY_QUERYResult };
 
@@ -45,10 +45,10 @@ export default function AdditionalInfo({ data }: Props) {
 
       <section className="flex flex-col gap-4 text-center lg:pt-10 pt-shorter">
         <h1 className="font-bold font-source text-dark">{data?.additionalInfo?.mapImageTitle}</h1>
-        <section className="grid grid-cols-3 shadow-md py-10 bg-white">
+        <section className="grid grid-cols-3 shadow-md bg-white">
           {data?.additionalInfo?.mapImage ? (
             <section className="col-span-2">
-              <Img src={urlFor(data?.additionalInfo?.mapImage).url()} alt={data?.title ?? ""} />
+              <InnerImageZoom src={urlFor(data?.additionalInfo?.mapImage).url()} zoomSrc={urlFor(data?.additionalInfo?.mapImage).url()} />
             </section>
           ) : null}
 
@@ -66,7 +66,7 @@ export default function AdditionalInfo({ data }: Props) {
             ].map((e) => {
               return (
                 <section key={e.label} className="flex items-center gap-2">
-                  <Icon style={{ color: e.color }} icon={e.icon} width={20} />
+                  <Icon style={{ color: e.color }} icon={e.icon} width={25} />
                   <p className="font-bold">{e.label}</p>
                 </section>
               );
