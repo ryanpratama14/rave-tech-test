@@ -49,10 +49,25 @@ export default function AdditionalExperiences({ data }: Props) {
 
   return (
     <Fragment>
-      <section className="space-y-4 lg:space-y-6">
-        <section className="flex justify-between gap-4 items-center">
+      <Swiper
+        navigation={{ nextEl: ".nav-next", prevEl: ".nav-prev" }}
+        simulateTouch={false}
+        className="w-full !pt-[4.5rem] lg:!pt-[4rem]"
+        mousewheel={{ forceToAxis: true }}
+        slidesPerView={1.1}
+        spaceBetween={15}
+        modules={[Mousewheel, Navigation]}
+        breakpoints={{ 1024: { slidesPerView: 3 } }}
+        onSlideChange={(swiper) => {
+          setIsAtBeginning(swiper.isBeginning);
+          setIsAtEnd(swiper.isEnd);
+        }}
+        onReachBeginning={() => setIsAtBeginning(true)}
+        onReachEnd={() => setIsAtEnd(true)}
+      >
+        <section className="flex items-center justify-between absolute gap-4 top-0 w-full">
           <h1 className="text-dark font-bold font-source">Included and optional experiences</h1>
-          <section className={cn("flex gap-3", { "lg:hidden": data && data?.length <= 3 })}>
+          <section className={cn("flex gap-3 items-center", { "lg:hidden": data && data?.length <= 3 })}>
             <button
               disabled={isAtBeginning}
               type="button"
@@ -75,80 +90,63 @@ export default function AdditionalExperiences({ data }: Props) {
           </section>
         </section>
 
-        <Swiper
-          navigation={{ nextEl: ".nav-next", prevEl: ".nav-prev" }}
-          simulateTouch={false}
-          className="w-full"
-          mousewheel={{ forceToAxis: true }}
-          slidesPerView={1.1}
-          spaceBetween={15}
-          modules={[Mousewheel, Navigation]}
-          breakpoints={{ 1024: { slidesPerView: 3 } }}
-          onSlideChange={(swiper) => {
-            setIsAtBeginning(swiper.isBeginning);
-            setIsAtEnd(swiper.isEnd);
-          }}
-          onReachBeginning={() => setIsAtBeginning(true)}
-          onReachEnd={() => setIsAtEnd(true)}
-        >
-          {data?.map((e) => {
-            return (
-              <SwiperSlide key={e._key}>
-                <section className="flex flex-col rounded-md border-1 border-gray_lighter">
-                  <section className="relative">
-                    {e.image ? <Img src={urlFor(e.image).url()} alt={e.title ?? ""} className="rounded-t-md aspect-[21/10] object-cover" /> : null}
+        {data?.map((e) => {
+          return (
+            <SwiperSlide key={e._key}>
+              <section className="flex flex-col rounded-md border-1 border-gray_lighter">
+                <section className="relative">
+                  {e.image ? <Img src={urlFor(e.image).url()} alt={e.title ?? ""} className="rounded-t-md aspect-[21/10] object-cover" /> : null}
 
-                    <small
-                      className="px-2 py-0.5 rounded-md font-semibold absolute top-2 left-2"
-                      style={{ backgroundColor: e.experienceType?.bgColor, color: e.experienceType?.textColor }}
-                    >
-                      {e.experienceType?.title}
-                    </small>
-                  </section>
-                  <section className="h-56 lg:h-64 flex flex-col justify-between p-4">
-                    <section className="flex flex-col gap-2">
-                      <h5 className="text-dark font-source font-bold">{e?.title}</h5>
-                      <small className="text-pretty">{truncate(e?.description ?? "")}</small>
-
-                      {isTruncated(e?.description ?? "") ? (
-                        <button
-                          onClick={() => {
-                            setOpenDetail(true);
-                            setSelectedData(e);
-                          }}
-                          type="button"
-                          className="border-b-1 border-dotted hover:border-solid border-red font-bold w-fit text-[14px]"
-                        >
-                          See more
-                        </button>
-                      ) : null}
-                    </section>
-
-                    {e?.price ? (
-                      <section className="flex items-center justify-between text-dark">
-                        <small className="font-bold">Additional cost applies</small>
-
-                        <Tooltip
-                          classNameContent="w-72 group-hover:-top-24 -top-16 right-0"
-                          content="Optional Experiences are enchancments to your tour"
-                          contentTitle="Optional experiences"
-                        >
-                          <Icon icon={ICONS.info} width={25} />
-                        </Tooltip>
-                      </section>
-                    ) : (
-                      <section className="text-purple_darker flex gap-2 items-center">
-                        <Icon icon={ICONS.check} width={25} />
-                        <small className="font-bold">Included with trip</small>
-                      </section>
-                    )}
-                  </section>
+                  <small
+                    className="px-2 py-0.5 rounded-md font-semibold absolute top-2 left-2"
+                    style={{ backgroundColor: e.experienceType?.bgColor, color: e.experienceType?.textColor }}
+                  >
+                    {e.experienceType?.title}
+                  </small>
                 </section>
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      </section>
+                <section className="h-56 lg:h-64 flex flex-col justify-between p-4">
+                  <section className="flex flex-col gap-2">
+                    <h5 className="text-dark font-source font-bold">{e?.title}</h5>
+                    <small className="text-pretty">{truncate(e?.description ?? "")}</small>
+
+                    {isTruncated(e?.description ?? "") ? (
+                      <button
+                        onClick={() => {
+                          setOpenDetail(true);
+                          setSelectedData(e);
+                        }}
+                        type="button"
+                        className="border-b-1 border-dotted hover:border-solid border-red font-bold w-fit text-[14px]"
+                      >
+                        See more
+                      </button>
+                    ) : null}
+                  </section>
+
+                  {e?.price ? (
+                    <section className="flex items-center justify-between text-dark">
+                      <small className="font-bold">Additional cost applies</small>
+
+                      <Tooltip
+                        classNameContent="w-72 group-hover:-top-24 -top-16 right-0"
+                        content="Optional Experiences are enchancments to your tour"
+                        contentTitle="Optional experiences"
+                      >
+                        <Icon icon={ICONS.info} width={25} />
+                      </Tooltip>
+                    </section>
+                  ) : (
+                    <section className="text-purple_darker flex gap-2 items-center">
+                      <Icon icon={ICONS.check} width={25} />
+                      <small className="font-bold">Included with trip</small>
+                    </section>
+                  )}
+                </section>
+              </section>
+            </SwiperSlide>
+          );
+        })}
+      </Swiper>
 
       <Dialog open={openDetail} onClose={() => setOpenDetail(false)}>
         <section className="space-y-6">
