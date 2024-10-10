@@ -45,7 +45,7 @@ export default function AdditionalInfo({ data }: Props) {
 
       <section className="flex flex-col gap-4 text-center lg:pt-10 pt-shorter">
         <h1 className="font-bold font-source text-dark">{data?.additionalInfo?.mapImageTitle}</h1>
-        <section className="grid grid-cols-3 shadow-md py-10 bg-white">
+        <section className="grid grid-cols-3 shadow-md bg-white">
           {data?.additionalInfo?.mapImage ? (
             <section className="col-span-2">
               <InnerImageZoom src={urlFor(data?.additionalInfo?.mapImage).url()} zoomSrc={urlFor(data?.additionalInfo?.mapImage).url()} />
