@@ -86,7 +86,7 @@ const Feature = ({ condition, icon, text }: { condition: boolean; text: string; 
       <div className="flex items-center justify-center bg-[#F2F2F2] size-12 lg:size-14 rounded-full">
         <Icon icon={icon} width={30} className="text-gray" />
       </div>
-      <p className="font-semibold">{text}</p>
+      <p className="font-semibold text-dark">{text}</p>
     </section>
   );
 };
