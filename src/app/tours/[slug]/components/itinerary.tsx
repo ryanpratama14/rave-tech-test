@@ -91,7 +91,7 @@ export default function Itinerary({ data }: Props) {
               <Icon icon={isDownloaded ? ICONS.check : "ic:sharp-sim-card-download"} width={30} />
               Download itinerary
             </button>
-            <button type="button" className="flex items-center gap-1 font-bold" onClick={handlePrint}>
+            <button type="button" className="hidden lg:flex items-center gap-1 font-bold" onClick={handlePrint}>
               <Icon icon="ic:baseline-print" width={30} />
               Print itinerary
             </button>
