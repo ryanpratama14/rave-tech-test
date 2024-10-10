@@ -71,7 +71,7 @@ export default function Itinerary({ data }: Props) {
                   "lg:h-[10rem]": firstAndLastIndex,
                 })}
               >
-                <div className={cn("w-0 lg:w-56 h-full animate-longer", { "w-0": isSelected })}>
+                <div className={cn("h-full animate-longer w-0", { "w-0 lg:w-64": !isSelected })}>
                   {e?.image ? <Img src={urlFor(e.image).url()} alt={e?.title ?? ""} className="object-cover size-full rounded-l-md" /> : null}
                 </div>
 
@@ -114,8 +114,8 @@ export default function Itinerary({ data }: Props) {
                 </section>
               </button>
 
-              <section className={cn("animate h-full", { "h-0 invisible": !isSelected })}>
-                <div className={cn("space-y-4 lg:space-y-6 lg:p-8 p-4 animate", { "-translate-y-6 invisible opacity-0": !isSelected })}>
+              <section className={cn("animate h-full duration-500", { "h-0 invisible": !isSelected })}>
+                <div className={cn("space-y-4 lg:space-y-6 lg:p-8 p-4 animate duration-500", { "-translate-y-6 invisible opacity-0": !isSelected })}>
                   <section className="grid lg:grid-cols-2 gap-4 lg:gap-16">
                     <section className="space-y-2 max-lg:order-2">
                       <p className="font-semibold text-gray">Day {e.day}</p>
